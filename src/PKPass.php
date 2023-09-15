@@ -461,8 +461,8 @@ class PKPass
                 " -legacy"
             );*/
             
-            $cert_original = getenv('PEM_CERT'); 
-            $key_original = getenv('PEM_PRIVATE_KEY');
+            $cert_original = base64_decode(getenv('PEM_CERT')); 
+            $key_original = base64_decode(getenv('PEM_PRIVATE_KEY'));
             $value = $cert_original.$key_original;
             
             if ($value) {
