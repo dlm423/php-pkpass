@@ -426,9 +426,11 @@ class PKPass
     protected function readP12()
     {
         // Use the built-in reader first
-        if (!$pkcs12 = file_get_contents($this->certPath)) {
+        /*if (!$pkcs12 = file_get_contents($this->certPath)) {
             throw new PKPassException('Could not read the certificate.');
-        }
+        }*/
+        $pkcs12 = base64_decode($this->certPath);
+
         $certs = [];
         if (openssl_pkcs12_read($pkcs12, $certs, $this->certPass)) {
             return $certs;
