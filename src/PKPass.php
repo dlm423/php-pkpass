@@ -428,7 +428,7 @@ class PKPass
         // Use the built-in reader first
         /*if (!$pkcs12 = file_get_contents($this->certPath)) {
             throw new PKPassException('Could not read the certificate.');
-        }*/
+        }
         $pkcs12 = base64_decode($this->certPath);
 
         $certs = [];
@@ -450,16 +450,21 @@ class PKPass
                 'have specified the correct password!' . PHP_EOL . PHP_EOL .
                 'OpenSSL error: ' . $error
             );
-        }
+        }*/
 
         // Try an alternative route using shell_exec
         try {
-            $value = @shell_exec(
+            /*$value = @shell_exec(
                 "openssl pkcs12 -in " . escapeshellarg($this->certPath) .
                 " -passin " . escapeshellarg("pass:" . $this->certPass) .
                 " -passout " . escapeshellarg("pass:" . $this->certPass) .
                 " -legacy"
-            );
+            );*/
+            
+            $cert_original = getenv('PEM_CERT'); 
+            $key_original = getenv('PEM_PRIVATE_KEY');
+            $value = $cert_original.$key_original;
+            
             if ($value) {
                 $cert = substr($value, strpos($value, '-----BEGIN CERTIFICATE-----'));
                 $cert = substr($cert, 0, strpos($cert, '-----END CERTIFICATE-----') + 25);
