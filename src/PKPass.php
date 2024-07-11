@@ -468,8 +468,8 @@ class PKPass
             if ($value) {
                 $cert = substr($value, strpos($value, '-----BEGIN CERTIFICATE-----'));
                 $cert = substr($cert, 0, strpos($cert, '-----END CERTIFICATE-----') + 25);
-                $key = substr($value, strpos($value, '-----BEGIN ENCRYPTED PRIVATE KEY-----'));
-                $key = substr($key, 0, strpos($key, '-----END ENCRYPTED PRIVATE KEY-----') + 35);
+                $key = substr($value, strpos($value, '-----BEGIN PRIVATE KEY-----'));
+                $key = substr($key, 0, strpos($key, '-----END PRIVATE KEY-----') + 35);
                 if (strlen($cert) > 0 && strlen($key) > 0) {
                     $certs['cert'] = $cert;
                     $certs['pkey'] = $key;
